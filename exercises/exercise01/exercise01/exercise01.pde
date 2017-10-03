@@ -81,7 +81,15 @@ void draw() {
   }
   
   // Drawing the circle at position (circleX, circleY) and CIRCLE_SIZE size
-  ellipse(circleX, circleY, circleSize, circleSize);
+  
+  // If mouse is at the left side of the screen - drawing circle
+  // otherwise - drawing square
+  if (mouseX < width/2) {
+    ellipse(circleX, circleY, circleSize, circleSize);
+  }
+  else {
+    rect(circleX, circleY, circleSize, circleSize);
+  }
   
   // Chanding position of the circle by moving it according to the speed value alogn x-axis.
   // Position of the circle on x-axis equals to initial position plus integer circleVX which equals to 7
