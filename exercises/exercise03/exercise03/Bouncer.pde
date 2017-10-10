@@ -14,7 +14,7 @@ class Bouncer {
   color hoverColor;
 
 
-  // Withing the object "Bouncer" with arguments that are assigned to the object.
+  // Constructor, creats object with position x, y; speed vx, vy; size; default color, and hover color. 
   Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, color tempDefaultColor, color tempHoverColor) {
 
     // Position of x, y coordinates which aquire their new values (tempX and tempY).
@@ -34,13 +34,13 @@ class Bouncer {
     fillColor = defaultColor;
   }
 
-  // Calls function "update". 
+  // Updating internal variables. 
   void update() {
     // Updated position of x and y coordinates.  
     x += vx;
     y += vy;
 
-    // Funtion handleBounce updates the object's behavior.  
+    // Funtion handleBounce updates the object's behavior on bounce.  
     handleBounce();
 
     // Function handleMouse updates the behavior of the object with mouse position.
@@ -73,8 +73,7 @@ class Bouncer {
     //Otherwise remain defaultColor.
     if (dist(mouseX, mouseY, x, y) < size/2) {
       fillColor = hoverColor;
-    }
-    else {
+    } else {
       fillColor = defaultColor;
     }
   }
