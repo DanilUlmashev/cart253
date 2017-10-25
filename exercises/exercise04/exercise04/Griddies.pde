@@ -62,8 +62,6 @@ class Griddies {
 
           griddie.changeColor();
           sparkle.changeColor();
-        } else {
-          sparkles.sparkles[j].active = true;
         }
       }
     }

@@ -103,9 +103,11 @@ class Griddie {
 
 
   void changeColor() {
+    if (active) {
     fill(#FA83BD, energy); 
     noStroke();
     rect(x, y, size, size);
+  }
   }
 
   // display()

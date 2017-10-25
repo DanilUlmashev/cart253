@@ -38,10 +38,12 @@ class Sparkle {
   }
 
   void changeColor() {
+    if (active) {
     stroke(100, 50, 150);
     strokeWeight(1);
     fill(#33FF15);
     ellipse(x, y, random(size), random(size));
+    }
   }
 
 
