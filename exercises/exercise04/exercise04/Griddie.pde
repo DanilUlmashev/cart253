@@ -35,26 +35,33 @@ class Griddie {
   void update() {
     
     // QUESTION: What is this if-statement for?
+    // This statement prevents futher execution if the energy of the object is 0.
     if (energy == 0) {
       return;
     }
     
     // QUESTION: How does the Griddie movement updating work?
+    // The object moves with the range of -1 to 2 and multiplied by its own size
     int xMoveType = floor(random(-1,2));
     int yMoveType = floor(random(-1,2));
     x += size * xMoveType;
     y += size * yMoveType;
     
     // QUESTION: What are these if statements doing?
+    // These If statements loop the object around the screen
+    // if object goes off the left side of the screen then it appears on the rigth.
     if (x < 0) {
       x += width;
     }
+    // if object goes off the right side of the screen then it appears on the left.
     else if (x >= width) {
       x -= width;
     }
+    // if object goes off the top side of the screen then it appears on the bottom.
     if (y < 0) {
       y += height;
     }
+    // if object goes off the bottom side of the screen then it appears on the top.
     else if (y >= height) {
       y -= height;
     }
@@ -74,11 +81,13 @@ class Griddie {
   
   void collide(Griddie other) {
     // QUESTION: What is this if-statement for?
+    // this if statement prevents collision energy increase if either of the objects are already at 0 energy. 
     if (energy == 0 || other.energy == 0) {
       return;
     }
     
     // QUESTION: What does this if-statement check?
+    // This statement checks if center of one objects is the same as the other.
     if (x == other.x && y == other.y) {
       // Increase this Griddie's energy
       energy += collideEnergy;
@@ -92,6 +101,7 @@ class Griddie {
   // Draw the Griddie on the screen as a rectangle
   void display() {
     // QUESTION: What does this fill line do?
+    // This line applies the color to the drawing object accordint to its energy level. 
     fill(fill, energy); 
     noStroke();
     rect(x, y, size, size);

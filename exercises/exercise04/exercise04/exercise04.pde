@@ -21,6 +21,7 @@ void setup() {
   frameRate(10);
 
   // QUESTION: What does this for loop do?
+  // This loop initializes griddies array with Griddie class objects.
   for (int i = 0; i < griddies.length; i++) {
     int x = floor(random(0, width/gridSize));
     int y = floor(random(0, height/gridSize));
@@ -44,8 +45,10 @@ void draw() {
     // Now go through all the griddies a second time...
     for (int j = 0; j < griddies.length; j++) {
       // QUESTION: What is this if-statement for?
+      // This statement prevents checking (or colliding) object to itself.
       if (j != i) {
         // QUESTION: What does this line check?
+        // This line checks if objects collide and update their energy levels.
         griddies[i].collide(griddies[j]);
       }
     }
