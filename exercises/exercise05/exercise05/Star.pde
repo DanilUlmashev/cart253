@@ -1,7 +1,10 @@
-class Star extends Particles {
-  
+// Class Star, represents the background moving star.s
 
-  
+// Class Star also extends all functions and parameters from abstract class Particles
+class Star extends Particles {
+
+
+
   boolean d = false;
 
   Star() {
@@ -24,21 +27,11 @@ class Star extends Particles {
       d = true;
     }
   }
-  
+
   void reset() {
     x = random(0, width);
     y = random(0, height);
     dx = random(-2, 3);
     dy = random(-3, 5);
   }
-  
-  //boolean shouldDouble() {
-  //  if (d) {
-  //    d = false;
-  //    return true;
-  //  }
-  //  return false;
-  //}
-  
-
 }

@@ -1,3 +1,6 @@
+// Class Enemy, represents the incoming enemy unit.
+
+// Class Enemy also extends all functions and parameters from abstract class Particles 
 class Enemy extends Particles {
 
   float size;
@@ -5,7 +8,7 @@ class Enemy extends Particles {
 
 
   Enemy(float tempX, float tempY) {
-    type = ParticleType.ENEMY;
+
     x = tempX;
     y = tempY;
     dx = 0;
@@ -26,7 +29,7 @@ class Enemy extends Particles {
     y += dy;
 
 
-    if (rectRect (x, y, 50, 50, ship.x, ship.y, ship.size, ship.size)) {
+    if (collision (x, y, 50, 50, ship.x, ship.y, ship.size, ship.size)) {
       background(150);
     }
   }
