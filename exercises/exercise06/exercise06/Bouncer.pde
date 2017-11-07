@@ -8,6 +8,7 @@ class Bouncer {
   // Variables for position
   float x;
   float y;
+  float alpha;
 
   // Variables for velocity
   float vx;
@@ -76,7 +77,7 @@ class Bouncer {
   // and with its fill
   void display() {
     noStroke();
-    fill(fillColor);
+    fill(fillColor, 50);
     ellipse(x, y, size, size);
   }
 }
