@@ -11,10 +11,13 @@ Capture video;
 // A PVector allows us to store an x and y location in a single object
 // When we create it we give it the starting x and y (which I'm setting to -1, -1
 // as a default value)
-PVector brightestPixel = new PVector(-1,-1);
+//PVector brightestPixel = new PVector(-1,-1);
 
 // An array of bouncers to play with
 Bouncer[] bouncers = new Bouncer[10];
+
+color trackColor = color(0, 0, 255);
+ArrayList<Blob> blobs = new ArrayList<Blob>();
 
 // setup()
 //
@@ -43,10 +46,54 @@ void setup() {
 
 void draw() {
   // A function that processes the current frame of video
-  handleVideoInput();
+  //handleVideoInput();
+  
+  if (!video.available()) {
+    // If not, then just return, nothing to do
+    return;
+  }
+  
+  video.read();
 
   // Draw the video frame to the screen
   image(video, 0, 0);
+  
+  blobs.clear();
+  for (int x = 0; x < video.width; x++) {
+    for (int y = 0; y < video.height; y++) {
+      // Calculate the location in the 1D pixels array
+      int loc = x + y * width;
+      color pixelColor = video.pixels[loc];
+      
+      float r1 = red(pixelColor);
+      float g1 = green(pixelColor);
+      float b1 = blue(pixelColor);
+      float r2 = red(trackColor);
+      float g2 = green(trackColor);
+      float b2 = blue(trackColor);
+      
+      float d = dist(r1, g1, b1, r2, g2, b2);
+      if (d < 120) {
+        boolean found = false;
+        for (Blob b : blobs) {
+          if (b.isNear(x, y)) {
+            b.add(x, y);
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          Blob b = new Blob(x, y);
+          blobs.add(b);
+        }
+      }
+    }
+  }
+  for (Blob b : blobs) {
+    if (b.getArea() > 500) {
+      b.show();
+    }
+  }
   
   // Our old friend the for-loop running through the length of an array to
   // update and display objects, in this case Bouncers.
@@ -55,54 +102,5 @@ void draw() {
   for (int i = 0; i < bouncers.length; i++) {
    bouncers[i].update();
    bouncers[i].display();
-  }
-  
-  // For now we just draw a crappy ellipse at the brightest pixel
-  fill(#ff0000);
-  stroke(#ffff00);
-  strokeWeight(10);
-  ellipse(brightestPixel.x,brightestPixel.y,20,20);
-}
-
-// handleVideoInput
-//
-// Checks for available video, reads the frame, and then finds the brightest pixel
-// in that frame and stores its location in brightestPixel.
-
-void handleVideoInput() {
-  // Check if there's a frame to look at
-  if (!video.available()) {
-    // If not, then just return, nothing to do
-    return;
-  }
-  
-  // If we're here, there IS a frame to look at so read it in
-  video.read();
-
-  // Start with a very low "record" for the brightest pixel
-  // so that we'll definitely find something better
-  float brightnessRecord = 0;
-
-  // Go through every pixel in the grid of pixels made by this
-  // frame of video
-  for (int x = 0; x < video.width; x++) {
-    for (int y = 0; y < video.height; y++) {
-      // Calculate the location in the 1D pixels array
-      int loc = x + y * width;
-      // Get the color of the pixel we're looking at
-      color pixelColor = video.pixels[loc];
-      // Get the brightness of the pixel we're looking at
-      float pixelBrightness = brightness(pixelColor);
-      // Check if this pixel is the brighest we've seen so far
-      if (pixelBrightness > brightnessRecord) {
-        // If it is, change the record value
-        brightnessRecord = pixelBrightness;
-        // Remember where this pixel is in the the grid of pixels
-        // (and therefore on the screen) by setting the PVector
-        // brightestPixel's x and y properties.
-        brightestPixel.x = x;
-        brightestPixel.y = y;
-      }
-    }
   }
 }
