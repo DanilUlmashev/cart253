@@ -1,6 +1,14 @@
 // Exercise 06
 //
 // Using the webcam as input to play with Bouncers.
+// Changed the original file by introducing new array of intercative objects of class Blob.
+// The blobs are finding clusters of a particular color on the video frame and allow creating intercation based on their
+// position and size. These particular blobs are looking for clusters of blue color and if previously 
+// object bouncer intersects with the blob, it becomes inactive and disappears form the screen.
+//
+// The purpose of this program is to flash a blue color preferably form the screen of a smartphone and to catch all the ball
+// that are bouncing on the screen.
+// Clicking the mouse on the screen will reset the state of the program.
 
 // Import the video library
 import processing.video.*;
@@ -62,7 +70,15 @@ void draw() {
   // If the brightness (or other video property) is going to interact with all the
   // Bouncers, it will need to happen in here.
   for (int i = 0; i < bouncers.length; i++) {
-   bouncers[i].update();
+   bouncers[i].update(blobs);
    bouncers[i].display();
+  }
+}
+
+
+// Reseting the state of the program by clicking the mouse
+void mouseClicked() {
+  for (int i = 0; i < bouncers.length; i++) {
+    bouncers[i].active = true;
   }
 }

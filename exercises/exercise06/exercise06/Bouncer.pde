@@ -21,6 +21,9 @@ class Bouncer {
 
   // The default fill colour of the Bouncer
   color defaultColor;
+  
+  // Added actice state variable to indicate if the object is active or not
+  boolean active = true;
 
   // Bouncer(tempX,tempY,tempVX,tempVY,tempSize,tempDefaultColor)
   //
@@ -40,11 +43,20 @@ class Bouncer {
   //
   // Adds the Bouncer's current velocity to its position
   // and checks for bouncing off the walls.
-  void update() {
-    x += vx;
-    y += vy;
-
-    handleBounce();
+  
+  // Added blobs object as a parametre to the function to handle intersection of the bouncer
+  // with the blobs
+  void update(Blobs blobs) {
+    
+    // Udating only the active bouncer
+    if (active) {
+      x += vx;
+      y += vy;
+      handleBounce();
+      
+      // Handling intercation of the bounce with the blobs
+      handleBlobs(blobs);
+    }
   }
 
   // handleBounce()
@@ -69,14 +81,27 @@ class Bouncer {
     x = constrain(x, size/2, width-size/2);
     y = constrain(y, size/2, height-size/2);
   }
+  
+  // Handles the if a collision of a a blob and a bouncer is detected, the bouncer
+  // becomes inactive and disappears form the screen
+  void handleBlobs(Blobs blobs) {
+    for (Blob blob : blobs.blobs) {
+      if (blob.contains(x, y)) {
+        active = false;
+      }
+    }
+  }
 
   // display()
   //
   // Draw an ellipse in the Bouncer's location, with its size
   // and with its fill
   void display() {
-    noStroke();
-    fill(fillColor);
-    ellipse(x, y, size, size);
+    // Displaying only the active boucer
+    if (active) {
+      noStroke();
+      fill(fillColor);
+      ellipse(x, y, size, size);
+    }
   }
 }
