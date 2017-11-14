@@ -1,4 +1,4 @@
-Ball ball;
+Ball[] ball = new Ball[10];
 
 
 
@@ -6,7 +6,10 @@ void setup() {
   size(640, 480);
   background(0);
   
-  ball = new Ball(width/2, height/2, 20);
+  for (int i = 0; i < ball.length; i++) {
+  ball[i] = new Ball(random(width), random(height), random(20), random(2,10));
+  }
+  
 
 
 }
@@ -15,9 +18,10 @@ void setup() {
 void draw() {
   background(0);
   
-  ball.update();
-  
-  ball.display();
+  for (int i = 0; i < ball.length; i++) {
+  ball[i].update();
+  ball[i].display();
+  }
 
 
 }

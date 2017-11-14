@@ -3,16 +3,18 @@
 
 class Ball {
   
-  int x, y, vx, vy, size, speed;
+  float x, y, vx, vy, size, speed, fillColor;
   
   
-  Ball(int tempX, int tempY, int tempSize) {
+  Ball(float tempX, float tempY, float tempSize, float tempSpeed) {
     x = tempX;
     y = tempY;
     size = tempSize;
-    speed = 5;
-    vx = speed;
-    vy = speed;
+    speed = tempSpeed;
+    vx = random(speed);
+    vy = random(speed);
+
+
     
     
   
@@ -35,7 +37,7 @@ class Ball {
   }
   
   void display() {
-    fill(200);
+    fill(random(20, 200));
     noStroke();
     rectMode(CENTER);
     rect(x, y, size, size, 10);
