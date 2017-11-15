@@ -1,9 +1,14 @@
+// A class that defines a circle that can bounce around on the screen
+// at a specific velocity.
 class Ball {
 
+  // Parameteres of the class
   float x, y, vx, vy, size, speed, fillColor;
   
+  // SoundFile object for reading sound files
   SoundFile pitch;
 
+  // Constructor 
   Ball(float tempX, float tempY, float tempSize, float tempSpeed) {
     x = tempX;
     y = tempY;
@@ -14,6 +19,9 @@ class Ball {
     pitch = null;
   }
 
+  // Adds the Ball's current velocity to its position
+  // and checks for bouncing off the walls.
+  // Adds pitch to the ball
   void update() {
     x += vx;
     y += vy;
@@ -31,7 +39,8 @@ class Ball {
       }
     }
   }
-
+  // Draw an ellipse in the Ball's location, with its size
+  // and with its fill
   void display() {
     fill(random(20, 250), random(0, 0), random(0, 0));
     noStroke();
