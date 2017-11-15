@@ -2,6 +2,10 @@
 class Ball {
 
   float x, y, vx, vy, size, speed, fillColor;
+  
+  
+  
+  
 
 
   Ball(float tempX, float tempY, float tempSize, float tempSpeed) {
@@ -11,6 +15,7 @@ class Ball {
     speed = tempSpeed;
     vx = random(speed);
     vy = random(speed);
+    
   }
 
   void update() {
@@ -19,16 +24,18 @@ class Ball {
 
     if (x + size/2 > width || x - size/2 < 0) {
       vx = -vx;
+      pitch.play();
     }
     if (y + size/2 > height || y - size/2 < 0) {
       vy = -vy;
+      pitch.play();
     }
   }
 
   void display() {
-    fill(random(20, 200));
+    fill(random(20, 250), random(0, 0), random(0, 0));
     noStroke();
     rectMode(CENTER);
-    rect(x, y, size, size, 10);
+    ellipse(x, y, size, size);
   }
 }
