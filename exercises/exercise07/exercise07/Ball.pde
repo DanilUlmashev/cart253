@@ -1,9 +1,8 @@
-
 class Ball {
 
   float x, y, vx, vy, size, speed, fillColor;
   
-  SoundFile pitch = null;
+  SoundFile pitch;
 
   Ball(float tempX, float tempY, float tempSize, float tempSpeed) {
     x = tempX;
@@ -12,6 +11,7 @@ class Ball {
     speed = tempSpeed;
     vx = random(speed);
     vy = random(speed);
+    pitch = null;
   }
 
   void update() {
