@@ -62,7 +62,7 @@ class Player extends SpaceShip {
     // Controlling if the playr's ship is shooting.
     if (keyPressed && keyCode == SHIFT && canShoot) {
       game.bullets.add(new Bullet(x+game.gridsize/2-pixelsize, y, pixelsize, false));
-      laserSound.play();
+      laserSound.play(1, random(0.5, 0.9));
       canShoot = false;
       shootdelay = 0;
     }
@@ -83,10 +83,10 @@ class Player extends SpaceShip {
         // Flashing the color and playing appropriate sound.
         flashColor(30);
         if (lives > 0) {
-          expSound.play();
+          expSound.play(1, random(0.2, 0.8));
         }
         else {
-          expSound2.play();
+          expSound2.play(1, random(0.2, 0.8));
         }
       }
     }

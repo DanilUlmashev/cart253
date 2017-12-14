@@ -103,10 +103,10 @@ class Game {
           
           // Playing appropriate sound.
           if (enemy.lives > 0) {
-            expSound.play();
+            expSound.play(1, random(0.2, 0.8));
           }
           else {
-            expSound2.play();
+            expSound2.play(1, random(0.2, 0.8));
           }
         }
         

@@ -44,11 +44,11 @@ class Enemy extends SpaceShip {
     }
 
     // The ship shoots a bullet with a cetain probability defined below.
-    int limit = 3000;
+    int limit = 1800;
     float r = random(0, limit);
     if (r > limit-1) {
       game.bullets.add(new Bullet(x, y, pixelsize, true));
-      laserSound2.play();
+      laserSound2.play(1, random(0.4, 0.9));
     }
   }
 
