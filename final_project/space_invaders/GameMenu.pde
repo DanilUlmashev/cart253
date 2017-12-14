@@ -1,20 +1,31 @@
+// class GameMenue defines the game menue and cotrolles menue navigation.
+
 class GameMenue {
 
+  
+  // Declaring button objects.
   Button buttonStart;
   Button buttonChooseShip1;
   Button buttonChooseShip2;
   Button buttonPlay;
   Button buttonReturn;
   
+  // declaring sample player ships for player to chose fomr.
   Player ship1;
   Player ship2;
 
+
+  // Constructor.
   GameMenue() {
+    
+    // Initializing the button.
     buttonStart = new Button(width/2, height/2, "Start");
     buttonChooseShip1 = new Button(0 + 150, height - 100, "Ship 1");
     buttonChooseShip2 = new Button(width - 150, height - 100, "Ship 2");
     buttonPlay = new Button(width/2, height/2, "Play");
     buttonReturn = new Button(width/2, height/2 + 100, "Return");
+    
+    // Initializing the sample ships.
     ship1 = new Player(15);
     ship1.setTypeOne();
     ship1.x = buttonChooseShip1.x - 52;
@@ -25,6 +36,8 @@ class GameMenue {
     ship2.y = buttonChooseShip2.y - 300;
   }
 
+
+  // Drawing the menue for the "START" state
   void startGame() {
     textSize(50);
     textAlign(CENTER);
@@ -35,12 +48,17 @@ class GameMenue {
     }
   }
 
+  
+  // Drawing the menue for the "CHOOSE" state
+  // Allows the player to choose from two types of sample ships.
   void choosePlayer() {
     buttonChooseShip1.draw();
     buttonChooseShip2.draw();
     stroke(0);
     ship1.draw();
     ship2.draw();
+    
+    // Allowing to chooe a type of ship that player will play with.
     if (buttonChooseShip1.buttonPressed()) {
       game.player.setTypeOne();
       gameState = "BEGIN";
@@ -51,6 +69,7 @@ class GameMenue {
     }
   }
 
+  // Drawing the menue for the "PLAY" state
   void beginGame() {
     buttonPlay.draw();
     buttonReturn.draw();
@@ -62,6 +81,8 @@ class GameMenue {
     }
   }
 
+
+  // Drawing the menue for the "LOSE" state
   void loseGame() {
     textSize(50);
     textAlign(CENTER);

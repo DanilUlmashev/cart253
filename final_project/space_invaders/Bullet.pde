@@ -1,8 +1,15 @@
-class Bullet {
-  int x, y;
-  boolean fromEnemy = false;
-  int size;
+// Class Bullet defines the bullet Player and Enemies are shooting at eachother.
 
+class Bullet {
+  
+  // Position and size of the bullet.
+  int x, y, size;
+  
+  // Determines the direction of the bullet.
+  boolean fromEnemy = false;
+
+
+  // Constructor.
   Bullet(int xpos, int ypos, int tempSize, boolean fromEnemyTmp) {
     x = xpos;
     y = ypos;
@@ -10,6 +17,8 @@ class Bullet {
     fromEnemy = fromEnemyTmp;
   }
 
+
+  // Updating position and drawing the bulltet.
   void draw() {
     fill(255);
     rect(x, y, size, size);

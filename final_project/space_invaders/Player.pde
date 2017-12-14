@@ -1,13 +1,14 @@
-import processing.sound.*;
+// Class Player defines player's ship which uses Spaceship as a base class
+// and extends its functionality.
 
 class Player extends SpaceShip {
-
-  SoundFile laser;
 
   boolean canShoot = true;
   int shootdelay = 0;
   boolean changeColor = false;
 
+
+  // Constructor.
   Player(int tempPixelsize) {
     pixelsize = tempPixelsize;
     x = width/2;
@@ -16,6 +17,7 @@ class Player extends SpaceShip {
     lives = 3;
   }
   
+  // Setting type 1 of the player's ship.
   void setTypeOne() {
     sprite    = new String[5];
     sprite[0] = "0010100";
@@ -25,6 +27,8 @@ class Player extends SpaceShip {
     sprite[4] = "0111110";
   }
   
+  
+  // Setting type 2 of the player's ship.
   void setTypeTwo() {
     sprite    = new String[5];
     sprite[0] = "1001001";
@@ -34,31 +38,39 @@ class Player extends SpaceShip {
     sprite[4] = "0110110";
   }
 
+  // Updates the state of the object.
   void updateObj() {
+    
+    // Determins the game controls of the player's ship.
     if (keyPressed && keyCode == LEFT) {
-      x = constrain(x - 5, 0, width);
+      x = constrain(x - 4, 0, width);
     }
-
     if (keyPressed && keyCode == RIGHT) {
-      x = constrain(x + 5, 0, width - 7 * pixelsize);
+      x = constrain(x + 4, 0, width - 7 * pixelsize);
     }
+    
+    // Controlling if the playr's ship is shooting.
     if (keyPressed && keyCode == SHIFT && canShoot) {
-      //laser = new SoundFile(this, "laser0.wav");
-      //laser.play();
-      game.bullets.add(new Bullet(x, y, pixelsize, false));
+      game.bullets.add(new Bullet(x+game.gridsize/2-pixelsize, y, pixelsize, false));
       laserSound.play();
       canShoot = false;
       shootdelay = 0;
     }
 
+    // Sets the interval between each shot.
     shootdelay++;
-    if (shootdelay >= 10) {
+    if (shootdelay >= 20) {
       canShoot = true;
     }
 
+    // Checks collision with enemy or bullet.
     if (collisionWithEnemy() || collisionWithBullet()) {
       if (lives > 0) {
+        
+        // Decreasing the lives after each hit by the bullet.
         lives--;
+        
+        // Flashing the color and playing appropriate sound.
         flashColor(30);
         if (lives > 0) {
           expSound.play();
@@ -67,14 +79,10 @@ class Player extends SpaceShip {
           expSound2.play();
         }
       }
-      if (lives == 0) {
-        for (int j=0; j < random(8); j++) {
-          game.balls.add(new Ball(x, y));
-        }
-      }
     }
   }
 
+  // Checks of if player's ship collided with the enemy's bullet.
   boolean collisionWithBullet() {
     for (int i = 0; i < game.bullets.size(); i++) {
       Bullet bullet = game.bullets.get(i);
@@ -87,6 +95,8 @@ class Player extends SpaceShip {
     return false;
   }
 
+
+  // Checks of if player's ship collided with the enemy ship.
   boolean collisionWithEnemy() {
     for (Enemy enemy : game.enemies) {
       float dist = dist(x, y, enemy.x, enemy.y);

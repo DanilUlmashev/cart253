@@ -1,23 +1,36 @@
+// Class game controles the actual game play of the game.
+
 class Game {
 
+  // Variables that controle the game grid, size, score, and other necessary parameters.
   int pixelsize = 5;
   int gridsize  = pixelsize * 7 + 5;
   int score = 0;
   int direction = 1;
   int level = 1;
 
+  // Declaring the Player object (the ship of the player).
   Player player;
 
+  // Declaring Array Lists that hold background srtars, enemy ships, 
+  // bullets, and ball particles.
   ArrayList<Star> stars = new ArrayList<Star>(500);
   ArrayList<Enemy> enemies = new ArrayList();
   ArrayList<Bullet> bullets = new ArrayList();
   ArrayList<Ball> balls = new ArrayList();
+  
+  // Determines if enemy array should advance (move down) towards the player.
   boolean incy = false;
 
+
+  // Constructor.
   Game() {
+    
+    // Resetting/initializing the game.
     reset();
   }
   
+  // Resetting/initializing the game.
   void reset() {
     stars.clear();
     player = new Player(pixelsize);
@@ -27,6 +40,7 @@ class Game {
     resetEnemies();
   }
 
+  // Resetting/initializing enemies in the game.
   void resetEnemies() {
     enemies.clear();
     for (int i = 0; i < width/gridsize/2; i++) {
@@ -36,21 +50,26 @@ class Game {
     }
   }
 
+  // Drawing the game play
   void draw() {
+    
+    // Drawing the background stars.
     for (int i = 0; i < stars.size(); i++) {
       Star star = stars.get(i);
       star.draw();
     }
-
-    //if (player.alive) {
+    
+    // Drawing the player's ship.
     player.draw();
-    //}
 
+    // Drawing bullets.
     for (int i = 0; i < bullets.size(); i++) {
       Bullet bullet = bullets.get(i);
       bullet.draw();
     }
 
+    // Checking if enemy has reached the borders of the screen, and if so, 
+    // advancing the enemies towards the player.
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
       if (enemy.outside() == true) {
@@ -60,12 +79,19 @@ class Game {
       }
     }
 
+    // Checking for each enemy if it colided (was hit) by a bullet.
     for (int i = 0; i < enemies.size(); i++) {
       Enemy enemy = enemies.get(i);
-      if (!enemy.collision() && enemy.collisionWithBall()) {
+      if (enemy.collisionWithBullet()) {      
         if (enemy.lives > 0) {
+          
+          // Decreasing the lives after each hit by the bullet.
           enemy.lives--;
+          
+          // Flashing the color.
           enemy.flashColor(30);
+          
+          // Playing appropriate sound.
           if (enemy.lives > 0) {
             expSound.play();
           }
@@ -73,9 +99,16 @@ class Game {
             expSound2.play();
           }
         }
+        
+        // If enemy has no lives left it gets removed from its Array List and drawing
+        // the ecplosion with ball particles.
         if (enemy.lives == 0) {
           enemies.remove(i);
+          
+          // Adding 10 points to the score after each successful hit.
           score += (10 * level);
+          
+          // Drawing the ecplosion with ball particles.
           for (int j=0; j < random(8); j++) {
             balls.add(new Ball(enemy.x, enemy.y));
           }
@@ -86,12 +119,16 @@ class Game {
     }
     incy = false;
 
+
+    // Creating wave of enemies once the previous one was completely eliminated
+    // and as a reward the player gets an extra live.
     if (enemies.size() == 0) {
       level++;
       player.lives++;
       resetEnemies();
     }
 
+    // Drawiing ball particales explosion 
     for (int i = 0; i < balls.size(); i++) {
       Ball ball = balls.get(i);
       ball.draw();
@@ -99,19 +136,23 @@ class Game {
         balls.remove(i);
       }
     }
-
-    drawLives(player.lives);
     
+    // Displaying the game stats.
+    drawStats();
+    
+    // Checking if player lost all of its lives and if so changing the game state.
     if (player.lives == 0) {
       gameState = "LOSE";
     }
   }
 
-  void drawLives(int n) {
+  // Drawing game stats
+  // Drawing lives and the score.
+  void drawStats() {
     fill(255);
     textSize(18);
     textAlign(LEFT, BOTTOM);
-    text("Lives: " + n, 10, height - 2);
+    text("Lives: " + player.lives, 10, height - 2);
     textAlign(RIGHT, BOTTOM);
     text("Score: " + score, width - 10, height - 2);
   }

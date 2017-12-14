@@ -1,4 +1,8 @@
+// Class SpaceShip is a bas class for the player ship and enemy ship
+// and provides basic functionality for drawing the a spaceship on the screen.
 class SpaceShip {
+  
+  // Variables for position, shape and color of the ship.
   int x, y;
   String sprite[];
   color c = color(255);
@@ -6,11 +10,14 @@ class SpaceShip {
   int lives;
   int pixelsize;
 
+
+  // Updating the object and drawing it on the screen.
   void draw() {
     updateObj();
     drawSprite();
   }
 
+  // Drawing the ship's shape.
   void drawSprite() {
     if (cTime > 0) {
       cTime--;
@@ -24,6 +31,8 @@ class SpaceShip {
       }
     }
     fill(c);
+    
+    // Drwing pixels according to the values of the sprite string.
     for (int i = 0; i < sprite.length; i++) {
       String row = (String) sprite[i];
       for (int j = 0; j < row.length(); j++) {
@@ -34,9 +43,12 @@ class SpaceShip {
     }
   }
 
+  // Updating the object.
+  // This methode is used to update player and the enemy ships.
   void updateObj() {
   }
 
+  // Setting the flashing duration. 
   void flashColor(int time) {
     c = color(255, 0, 0);
     cTime = time;

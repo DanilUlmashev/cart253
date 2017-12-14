@@ -1,8 +1,15 @@
+// Class button is used to draw button in the game menue. 
+
 class Button {
 
+  // Position and size of the button.
   int x, y, sizex, sizey;
+  
+  // Text on the button.
   String text;
 
+
+  // Constructor.
   Button(int tempX, int tempY, String tempText) {
     x = tempX;
     y = tempY;
@@ -11,6 +18,7 @@ class Button {
     text = tempText;
   }
 
+  // Drawing the button.
   void draw() {
     rectMode(CENTER);
     fill(200, 50);
@@ -22,6 +30,7 @@ class Button {
     text(text, x, y - 4);
   }
 
+  // Checking if buttin is pressed.
   boolean buttonPressed() {
     if (mousePressed && mouseX < x+sizex/2 && mouseX > x - sizex/2 && mouseY < y+sizey/2 && mouseY > y - sizey/2) {
       buttonSound.play();

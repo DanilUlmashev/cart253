@@ -1,16 +1,22 @@
-class Star {
-  float x, y, dx, dy;
-  boolean d = false;
+// class Star defines the star at the background.
 
+class Star {
+  
+  // Variables for the position and the speed of the star.
+  float x, y, dx, dy;
+
+  // Constructor. 
   Star() {
     reset();
   }
 
+  // Drawing and updating the star.
   void draw() {
     show();
     update();
   }
 
+  // Drawing the star.
   void show() {
     strokeWeight(2);
     stroke(200, random(20, 200));
@@ -18,15 +24,16 @@ class Star {
     rect(x, y, dx, dy);
   }
 
+  // Updating the position according to the speed and reseting the star if it went out of the screen.
   void update() {
     x += dx;
     y += dy;
     if (y > height || y < 0 || x > width || x < 0) {
       reset();
-      d = true;
     }
   }
 
+  // Reseting the star to a random location and speed.
   void reset() {
     x = random(0, width);
     y = random(0, height);
