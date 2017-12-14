@@ -28,18 +28,18 @@ class Game {
   ArrayList<Enemy> enemies = new ArrayList();
   ArrayList<Bullet> bullets = new ArrayList();
   ArrayList<Ball> balls = new ArrayList();
-  
+
   // Determines if enemy array should advance (move down) towards the player.
   boolean incy = false;
 
 
   // Constructor.
   Game() {
-    
+
     // Resetting/initializing the game.
     reset();
   }
-  
+
   // Resetting/initializing the game.
   void reset() {
     stars.clear();
@@ -47,6 +47,8 @@ class Game {
     for (int i = 0; i < 130; i++) {
       stars.add(0, new Star());
     }
+    score = 0;
+    level = 1;
     resetEnemies();
   }
 
@@ -62,13 +64,13 @@ class Game {
 
   // Drawing the game play
   void draw() {
-    
+
     // Drawing the background stars.
     for (int i = 0; i < stars.size(); i++) {
       Star star = stars.get(i);
       star.draw();
     }
-    
+
     // Drawing the player's ship.
     player.draw();
 
@@ -94,30 +96,29 @@ class Game {
       Enemy enemy = enemies.get(i);
       if (enemy.collisionWithBullet()) {      
         if (enemy.lives > 0) {
-          
+
           // Decreasing the lives after each hit by the bullet.
           enemy.lives--;
-          
+
           // Flashing the color.
           enemy.flashColor(30);
-          
+
           // Playing appropriate sound.
           if (enemy.lives > 0) {
             expSound.play(1, random(0.2, 0.8));
-          }
-          else {
+          } else {
             expSound2.play(1, random(0.2, 0.8));
           }
         }
-        
+
         // If enemy has no lives left it gets removed from its Array List and drawing
         // the ecplosion with ball particles.
         if (enemy.lives == 0) {
           enemies.remove(i);
-          
+
           // Adding 10 points to the score after each successful hit.
           score += (10 * level);
-          
+
           // Drawing the ecplosion with ball particles.
           for (int j=0; j < random(8); j++) {
             balls.add(new Ball(enemy.x, enemy.y));
@@ -146,10 +147,10 @@ class Game {
         balls.remove(i);
       }
     }
-    
+
     // Displaying the game stats.
     drawStats();
-    
+
     // Checking if player lost all of its lives and if so changing the game state.
     if (player.lives == 0) {
       gameState = "LOSE";

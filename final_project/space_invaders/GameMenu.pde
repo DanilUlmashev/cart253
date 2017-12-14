@@ -19,6 +19,7 @@ class GameMenue {
   Button buttonChooseShip2;
   Button buttonPlay;
   Button buttonReturn;
+  Button buttonRestart;
   Button buttonExit;
 
   // declaring sample player ships for player to chose fomr.
@@ -33,8 +34,9 @@ class GameMenue {
     buttonStart = new Button(width/2, height/2, "Start");
     buttonChooseShip1 = new Button(0 + 150, height - 100, "Ship 1");
     buttonChooseShip2 = new Button(width - 150, height - 100, "Ship 2");
-    buttonPlay = new Button(width/2, height/2, "Play");
+    buttonPlay = new Button(width/2, height/2, "YES");
     buttonReturn = new Button(width/2, height/2 + 100, "Return");
+    buttonRestart = new Button(width/2, height/2 + 100, "Restart");
     buttonExit = new Button(width/2, height/2 + 200, "Exit Game");
 
     // Initializing the sample ships.
@@ -64,6 +66,10 @@ class GameMenue {
   // Drawing the menue for the "CHOOSE" state
   // Allows the player to choose from two types of sample ships.
   void choosePlayer() {
+    textSize(50);
+    textAlign(CENTER);
+    text("Choose Ship", width/2, height/2 - 200);
+    
     buttonChooseShip1.draw();
     buttonChooseShip2.draw();
     stroke(0);
@@ -83,6 +89,10 @@ class GameMenue {
 
   // Drawing the menue for the "PLAY" state
   void beginGame() {
+    textSize(50);
+    textAlign(CENTER);
+    text("Are You Ready?", width/2, height/2 - 200);
+    
     buttonPlay.draw();
     buttonReturn.draw();
     if (buttonPlay.buttonPressed()) {
@@ -101,8 +111,8 @@ class GameMenue {
     text("Game Over", width/2, height/2 - 200);
     textAlign(CENTER, CENTER);
     text("Score: " + game.score, width/2, height/2);
-    buttonReturn.draw();
-    if (buttonReturn.buttonPressed()) {
+    buttonRestart.draw();
+    if (buttonRestart.buttonPressed()) {
       game.reset();
       gameState = "START";
     }

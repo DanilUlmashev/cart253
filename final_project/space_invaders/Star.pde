@@ -11,7 +11,7 @@
 // class Star defines the star at the background.
 
 class Star {
-  
+
   // Variables for the position and the speed of the star.
   float x, y, dx, dy;
 

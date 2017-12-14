@@ -13,13 +13,13 @@
 
 class Enemy extends SpaceShip {
 
-  
+
   // Constructor.
   Enemy(int xpos, int ypos, int tempPixelsize, int tempLives) {
     pixelsize = tempPixelsize;
     x = xpos;
     y = ypos;
-    
+
     // A string array that represents the design of the enemy ship.
     sprite = new String[5];
     sprite[0] = "1011101";
@@ -27,7 +27,7 @@ class Enemy extends SpaceShip {
     sprite[2] = "1111111";
     sprite[3] = "0101010";
     sprite[4] = "1000001";
-    
+
     // Determines the amount of remaing lives of the enemy ship.
     lives = tempLives;
   }
@@ -63,7 +63,7 @@ class Enemy extends SpaceShip {
     }
     return false;
   }
-  
+
   // Keeps the enemy ship inside the game screen.
   boolean outside() {
     if (x + (game.direction * game.gridsize) < 0 || x + (game.direction * game.gridsize) > width - game.gridsize) {

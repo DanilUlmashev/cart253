@@ -11,10 +11,10 @@
 // Class Bullet defines the bullet Player and Enemies are shooting at eachother.
 
 class Bullet {
-  
+
   // Position and size of the bullet.
   int x, y, size;
-  
+
   // Determines the direction of the bullet.
   boolean fromEnemy = false;
 

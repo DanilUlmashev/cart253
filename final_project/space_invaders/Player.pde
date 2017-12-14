@@ -26,7 +26,7 @@ class Player extends SpaceShip {
     setTypeOne();
     lives = 3;
   }
-  
+
   // Setting type 1 of the player's ship.
   void setTypeOne() {
     sprite    = new String[5];
@@ -36,8 +36,8 @@ class Player extends SpaceShip {
     sprite[3] = "1111111";
     sprite[4] = "0111110";
   }
-  
-  
+
+
   // Setting type 2 of the player's ship.
   void setTypeTwo() {
     sprite    = new String[5];
@@ -50,7 +50,7 @@ class Player extends SpaceShip {
 
   // Updates the state of the object.
   void updateObj() {
-    
+
     // Determins the game controls of the player's ship.
     if (keyPressed && keyCode == LEFT) {
       x = constrain(x - 4, 0, width);
@@ -58,7 +58,7 @@ class Player extends SpaceShip {
     if (keyPressed && keyCode == RIGHT) {
       x = constrain(x + 4, 0, width - 7 * pixelsize);
     }
-    
+
     // Controlling if the playr's ship is shooting.
     if (keyPressed && keyCode == SHIFT && canShoot) {
       game.bullets.add(new Bullet(x+game.gridsize/2-pixelsize, y, pixelsize, false));
@@ -76,16 +76,15 @@ class Player extends SpaceShip {
     // Checks collision with enemy or bullet.
     if (collisionWithEnemy() || collisionWithBullet()) {
       if (lives > 0) {
-        
+
         // Decreasing the lives after each hit by the bullet.
         lives--;
-        
+
         // Flashing the color and playing appropriate sound.
         flashColor(30);
         if (lives > 0) {
           expSound.play(1, random(0.2, 0.8));
-        }
-        else {
+        } else {
           expSound2.play(1, random(0.2, 0.8));
         }
       }

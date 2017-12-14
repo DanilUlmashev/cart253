@@ -14,7 +14,7 @@ class Button {
 
   // Position and size of the button.
   int x, y, sizex, sizey;
-  
+
   // Text on the button.
   String text;
 

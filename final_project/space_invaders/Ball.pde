@@ -52,7 +52,7 @@ class Ball {
     x += vx;
     y += vy;
   }
-  
+
   // Checks if ball particle is outside the screen.
   boolean outside() {
     return (x > width || x < 0 || y > height || y < 0);

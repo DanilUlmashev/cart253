@@ -43,22 +43,22 @@ SoundFile expSound2 = null;
 
 // Game setup.
 void setup() {
-  
+
   // Creating the font
   gameFont = createFont("Krungthep", 32);
   textFont(gameFont);
-  
+
   // Setting the screen.
   background(0);
   size(600, 800, FX2D);
-  
+
   // Initializing the sounds.
   laserSound = new SoundFile(this, "laser3.wav");
   laserSound2 = new SoundFile(this, "laser1.wav");
   buttonSound = new SoundFile(this, "button.aif");
   expSound = new SoundFile(this, "exp3.wav");
   expSound2 = new SoundFile(this, "exp2.wav");
-  
+
   // Initializing main game objects (game menue and game play).
   gameState = "START";
   gameMenue = new GameMenue();
@@ -69,7 +69,7 @@ void setup() {
 // Draw loop.
 void draw() { 
   background(0);
-  
+
   // Controlling the music in menue and game play.
   if (gameState != "PLAY") {
     if (gameMusic != null) {
@@ -80,8 +80,7 @@ void draw() {
       menuMusic = new SoundFile(this, "intro.mp3");
       menuMusic.loop();
     }
-  }
-  else {
+  } else {
     if (menuMusic != null) {
       menuMusic.stop();
       menuMusic = null;
@@ -91,7 +90,7 @@ void draw() {
       gameMusic.loop();
     }
   }
-  
+
   // Drawing various states of the game and game menue.
   if (gameState == "START") {
     gameMenue.startGame();
