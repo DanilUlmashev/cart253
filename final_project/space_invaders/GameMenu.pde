@@ -12,11 +12,11 @@ class GameMenue {
     x = width/2;
     y = height/2;
 
-    button = new Button(width/2, height/2);
-    button1 = new Button(0 + 150, height - 100);
-    button2 = new Button(width - 150, height - 100);
-    button3 = new Button(width/2, height/2);
-    button4 = new Button(width/2, height/2 + 100);
+    button = new Button(width/2, height/2, "Start");
+    button1 = new Button(0 + 150, height - 100, "Ship 1");
+    button2 = new Button(width - 150, height - 100, "Ship 2");
+    button3 = new Button(width/2, height/2, "Play");
+    button4 = new Button(width/2, height/2 + 100, "Return");
   }
 
   void startGame() {
@@ -44,7 +44,7 @@ class GameMenue {
       gameState = "PLAY";
     }
     if (button4.buttonPressed()) {
-      gameState = "CHOOSE";
+      gameState = "START";
     }
   }
 
@@ -53,11 +53,4 @@ class GameMenue {
     text("Game Over", x, y);
     textAlign(CENTER);
   }
-
-  //boolean buttonPressed() {
-  //  if (mousePressed && mouseX < button.x+button.sizex/2 && mouseX > button.x - button.sizex/2 && mouseY < button.y+button.sizey/2 && mouseY > button.y - button.sizey/2) {
-  //    return true;
-  //  }
-  //  return false;
-  //}
 } 

@@ -1,18 +1,17 @@
 class SpaceShip {
   int x, y;
   String sprite[];
-
   color c = color(255);
   int cTime = 0;
-
   int lives;
+  int pixelsize;
 
   void draw() {
     updateObj();
-    drawSprite(x, y);
+    drawSprite();
   }
 
-  void drawSprite(int xpos, int ypos) {
+  void drawSprite() {
     if (cTime > 0) {
       cTime--;
       if (cTime % 2 == 0) {
@@ -29,7 +28,7 @@ class SpaceShip {
       String row = (String) sprite[i];
       for (int j = 0; j < row.length(); j++) {
         if (row.charAt(j) == '1') {
-          rect(xpos+(j * pixelsize), ypos+(i * pixelsize), pixelsize, pixelsize);
+          rect(x + (j * pixelsize), y + (i * pixelsize), pixelsize, pixelsize);
         }
       }
     }
@@ -37,8 +36,6 @@ class SpaceShip {
 
   void updateObj() {
   }
-
-
 
   void flashColor(int time) {
     c = color(255, 0, 0);
