@@ -1,4 +1,19 @@
-//
+// ********************
+// Space Invaders Game - Final Project
+// Main game class
+// The purpose of the game is to shoot down as many enemy ships as possible 
+// and at the same time, not to let the enemies to destroy the player's ship. 
+// Player initially is given three lives. The enemies are coming in waves. Each time
+// the player destroys all ships in a single wave it is being granted one extra live.
+// Each consecutive wave of enemy ships is harder to kill as each of enemy ships is getting
+// an extra live too.
+// 
+// CART 253-B
+// Due 13 December, 2017
+// 
+// Submitted by Danil Ulmashev
+// Student ID 27033389
+// ********************
 
 
 // Importing sound library.

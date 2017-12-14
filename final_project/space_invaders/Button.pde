@@ -1,3 +1,13 @@
+// ********************
+// Space Invaders Game - Final Project
+//
+// CART 253-B
+// Due 13 December, 2017
+// 
+// Submitted by Danil Ulmashev
+// Student ID 27033389
+// ********************
+
 // Class button is used to draw button in the game menue. 
 
 class Button {

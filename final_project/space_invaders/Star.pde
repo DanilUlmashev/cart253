@@ -1,3 +1,13 @@
+// ********************
+// Space Invaders Game - Final Project
+//
+// CART 253-B
+// Due 13 December, 2017
+// 
+// Submitted by Danil Ulmashev
+// Student ID 27033389
+// ********************
+
 // class Star defines the star at the background.
 
 class Star {

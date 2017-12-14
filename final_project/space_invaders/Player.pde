@@ -1,3 +1,13 @@
+// ********************
+// Space Invaders Game - Final Project
+//
+// CART 253-B
+// Due 13 December, 2017
+// 
+// Submitted by Danil Ulmashev
+// Student ID 27033389
+// ********************
+
 // Class Player defines player's ship which uses Spaceship as a base class
 // and extends its functionality.
 
@@ -59,7 +69,7 @@ class Player extends SpaceShip {
 
     // Sets the interval between each shot.
     shootdelay++;
-    if (shootdelay >= 20) {
+    if (shootdelay >= 10) {
       canShoot = true;
     }
 

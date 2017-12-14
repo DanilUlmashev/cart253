@@ -1,3 +1,13 @@
+// ********************
+// Space Invaders Game - Final Project
+//
+// CART 253-B
+// Due 13 December, 2017
+// 
+// Submitted by Danil Ulmashev
+// Student ID 27033389
+// ********************
+
 // Class SpaceShip is a bas class for the player ship and enemy ship
 // and provides basic functionality for drawing the a spaceship on the screen.
 class SpaceShip {
