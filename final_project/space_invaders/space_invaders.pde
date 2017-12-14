@@ -4,6 +4,8 @@ GameMenue gameMenue;
 Game game;
 String gameState;
 
+PFont gameFont;
+
 SoundFile gameMusic = null;
 SoundFile menuMusic = null;
 SoundFile laserSound = null;
@@ -13,6 +15,8 @@ SoundFile expSound = null;
 SoundFile expSound2 = null;
 
 void setup() {
+  gameFont = createFont("Krungthep", 32);
+  textFont(gameFont);
   background(0);
   size(600, 800, FX2D);
   laserSound = new SoundFile(this, "laser3.wav");
