@@ -15,6 +15,11 @@ class Game {
   boolean incy = false;
 
   Game() {
+    reset();
+  }
+  
+  void reset() {
+    stars.clear();
     player = new Player(pixelsize);
     for (int i = 0; i < 130; i++) {
       stars.add(0, new Star());
@@ -23,6 +28,7 @@ class Game {
   }
 
   void resetEnemies() {
+    enemies.clear();
     for (int i = 0; i < width/gridsize/2; i++) {
       for (int j = 0; j <= 5; j++) {
         enemies.add(new Enemy(i * gridsize, j * gridsize, pixelsize, level));
@@ -31,15 +37,14 @@ class Game {
   }
 
   void draw() {
-
     for (int i = 0; i < stars.size(); i++) {
       Star star = stars.get(i);
       star.draw();
     }
 
-    if (player.alive) {
-      player.draw();
-    }
+    //if (player.alive) {
+    player.draw();
+    //}
 
     for (int i = 0; i < bullets.size(); i++) {
       Bullet bullet = bullets.get(i);
@@ -61,6 +66,12 @@ class Game {
         if (enemy.lives > 0) {
           enemy.lives--;
           enemy.flashColor(30);
+          if (enemy.lives > 0) {
+            expSound.play();
+          }
+          else {
+            expSound2.play();
+          }
         }
         if (enemy.lives == 0) {
           enemies.remove(i);
@@ -90,6 +101,10 @@ class Game {
     }
 
     drawLives(player.lives);
+    
+    if (player.lives == 0) {
+      gameState = "LOSE";
+    }
   }
 
   void drawLives(int n) {

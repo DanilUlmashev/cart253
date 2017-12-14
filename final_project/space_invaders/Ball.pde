@@ -36,16 +36,4 @@ class Ball {
   boolean outside() {
     return (x > width || x < 0 || y > height || y < 0);
   }
-
-  //boolean collisionWithBall() {
-  //  for (int i = 0; i < balls.size(); i++) {
-  //    Enemy enemy = enemies.get(i);
-  //    // if (enemy.collisionWithBall(ball))
-  //    if (x > enemy.x && x < enemy.x + 7 * pixelsize + 5 && y > enemy.y && y < enemy.y + 5 * pixelsize) {
-  //      balls.remove(i);
-  //      return false;
-  //    }
-  //  }
-  //  return true;
-  //}
 }

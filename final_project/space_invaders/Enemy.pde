@@ -27,6 +27,7 @@ class Enemy extends SpaceShip {
     float r = random(0, limit);
     if (r > limit-1) {
       game.bullets.add(new Bullet(x, y, pixelsize, true));
+      laserSound2.play();
     }
   }
 

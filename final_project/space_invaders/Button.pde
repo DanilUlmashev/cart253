@@ -23,6 +23,7 @@ class Button {
 
   boolean buttonPressed() {
     if (mousePressed && mouseX < x+sizex/2 && mouseX > x - sizex/2 && mouseY < y+sizey/2 && mouseY > y - sizey/2) {
+      buttonSound.play();
       return true;
     }
     return false;

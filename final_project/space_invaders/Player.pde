@@ -6,39 +6,32 @@ class Player extends SpaceShip {
 
   boolean canShoot = true;
   int shootdelay = 0;
-  boolean alive = true;
-
   boolean changeColor = false;
 
-  boolean choose = false;
-
-
   Player(int tempPixelsize) {
-
     pixelsize = tempPixelsize;
-
     x = width/2;
     y = height - (10 * pixelsize);
-
-    if (choose) {
-      sprite    = new String[5];
-      sprite[0] = "0010100";
-      sprite[1] = "0110110";
-      sprite[2] = "1111111";
-      sprite[3] = "1111111";
-      sprite[4] = "0111110";
-    }
-
-    if (!choose) {
-      sprite    = new String[5];
-      sprite[0] = "1001001";
-      sprite[1] = "0110110";
-      sprite[2] = "0011100";
-      sprite[3] = "1110111";
-      sprite[4] = "0110110";
-    }
-
+    setTypeOne();
     lives = 3;
+  }
+  
+  void setTypeOne() {
+    sprite    = new String[5];
+    sprite[0] = "0010100";
+    sprite[1] = "0110110";
+    sprite[2] = "1111111";
+    sprite[3] = "1111111";
+    sprite[4] = "0111110";
+  }
+  
+  void setTypeTwo() {
+    sprite    = new String[5];
+    sprite[0] = "1001001";
+    sprite[1] = "0110110";
+    sprite[2] = "0011100";
+    sprite[3] = "1110111";
+    sprite[4] = "0110110";
   }
 
   void updateObj() {
@@ -53,6 +46,7 @@ class Player extends SpaceShip {
       //laser = new SoundFile(this, "laser0.wav");
       //laser.play();
       game.bullets.add(new Bullet(x, y, pixelsize, false));
+      laserSound.play();
       canShoot = false;
       shootdelay = 0;
     }
@@ -66,9 +60,14 @@ class Player extends SpaceShip {
       if (lives > 0) {
         lives--;
         flashColor(30);
+        if (lives > 0) {
+          expSound.play();
+        }
+        else {
+          expSound2.play();
+        }
       }
       if (lives == 0) {
-        alive = false;
         for (int j=0; j < random(8); j++) {
           game.balls.add(new Ball(x, y));
         }

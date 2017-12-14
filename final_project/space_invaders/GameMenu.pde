@@ -1,56 +1,75 @@
 class GameMenue {
 
-  Button button;
-  Button button1;
-  Button button2;
-  Button button3;
-  Button button4;
-
-  int x, y, sizex, sizey;
+  Button buttonStart;
+  Button buttonChooseShip1;
+  Button buttonChooseShip2;
+  Button buttonPlay;
+  Button buttonReturn;
+  
+  Player ship1;
+  Player ship2;
 
   GameMenue() {
-    x = width/2;
-    y = height/2;
-
-    button = new Button(width/2, height/2, "Start");
-    button1 = new Button(0 + 150, height - 100, "Ship 1");
-    button2 = new Button(width - 150, height - 100, "Ship 2");
-    button3 = new Button(width/2, height/2, "Play");
-    button4 = new Button(width/2, height/2 + 100, "Return");
+    buttonStart = new Button(width/2, height/2, "Start");
+    buttonChooseShip1 = new Button(0 + 150, height - 100, "Ship 1");
+    buttonChooseShip2 = new Button(width - 150, height - 100, "Ship 2");
+    buttonPlay = new Button(width/2, height/2, "Play");
+    buttonReturn = new Button(width/2, height/2 + 100, "Return");
+    ship1 = new Player(15);
+    ship1.setTypeOne();
+    ship1.x = buttonChooseShip1.x - 52;
+    ship1.y = buttonChooseShip1.y - 300;
+    ship2 = new Player(15);
+    ship2.setTypeTwo();
+    ship2.x = buttonChooseShip2.x - 52;
+    ship2.y = buttonChooseShip2.y - 300;
   }
 
   void startGame() {
-    button.draw();
-    if (button.buttonPressed()) {
+    textSize(50);
+    textAlign(CENTER);
+    text("Space Invaders", width/2, height/2 - 200);
+    buttonStart.draw();
+    if (buttonStart.buttonPressed()) {
       gameState = "CHOOSE"; // for testing, put back to CHOOSE
     }
   }
 
   void choosePlayer() {
-    button1.draw();
-    button2.draw();
-    if (button1.buttonPressed()) {
+    buttonChooseShip1.draw();
+    buttonChooseShip2.draw();
+    stroke(0);
+    ship1.draw();
+    ship2.draw();
+    if (buttonChooseShip1.buttonPressed()) {
+      game.player.setTypeOne();
       gameState = "BEGIN";
     }
-    if (button2.buttonPressed()) {
+    if (buttonChooseShip2.buttonPressed()) {
       gameState = "BEGIN";
+      game.player.setTypeTwo();
     }
   }
 
   void beginGame() {
-    button3.draw();
-    button4.draw();
-    if (button3.buttonPressed()) {
+    buttonPlay.draw();
+    buttonReturn.draw();
+    if (buttonPlay.buttonPressed()) {
       gameState = "PLAY";
     }
-    if (button4.buttonPressed()) {
+    if (buttonReturn.buttonPressed()) {
       gameState = "START";
     }
   }
 
   void loseGame() {
     textSize(50);
-    text("Game Over", x, y);
     textAlign(CENTER);
+    text("Game Over", width/2, height/2 - 200);
+    buttonReturn.draw();
+    if (buttonReturn.buttonPressed()) {
+      game.reset();
+      gameState = "START";
+    }
   }
 } 
