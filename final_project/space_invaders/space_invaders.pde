@@ -7,6 +7,7 @@
 // the player destroys all ships in a single wave it is being granted one extra live.
 // Each consecutive wave of enemy ships is harder to kill as each of enemy ships is getting
 // an extra live too.
+// Game controls for the player are Left and Right arrows to move the ship and SHIFT key to shoot.
 // 
 // CART 253-B
 // Due 13 December, 2017
